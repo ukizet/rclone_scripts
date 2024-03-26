@@ -9,6 +9,6 @@ bisync() {
   rclone bisync "$local_folder" "$remote_folder" --create-empty-src-dirs --verbose $exclude || exit 1
 }
 
-#bisync "$BASEBRAINY" "$BASEBRAINYREMOTE" 
-bisync "$BASHSCRIPTS" "$BASHSCRIPTSREMOTE"
+# bisync "$BASEBRAINY" "$BASEBRAINYREMOTE" 
+# bisync "$BASHSCRIPTS" "$BASHSCRIPTSREMOTE"
 bisync "$LOGSEQ" "$LOGSEQREMOTE"

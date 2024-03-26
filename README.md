@@ -15,6 +15,8 @@ CLIENT_ID=""
 CLIENT_SECRET=""
 ```
 
+Scripts dont have shebang cause I'm using NixOS and.. usual shebangs don't work here.
+
 # Other
 
 Короче нужно данные про пути перенести куда-то в базу данных или типо того. Вот пример: 

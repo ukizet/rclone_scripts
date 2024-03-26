@@ -11,6 +11,6 @@ resync() {
   rclone bisync "$local_folder" "$remote_folder" --create-empty-src-dirs --verbose --resync $exclude || exit 1
 }
 
-#resync "$BASEBRAINY" "$BASEBRAINYREMOTE" 
-resync "$BASHSCRIPTS" "$BASHSCRIPTSREMOTE"
+# resync "$BASEBRAINY" "$BASEBRAINYREMOTE" 
+# resync "$BASHSCRIPTS" "$BASHSCRIPTSREMOTE"
 resync "$LOGSEQ" "$LOGSEQREMOTE"

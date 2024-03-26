@@ -19,8 +19,6 @@ STORAGE=drive
 
 mkdir -p -v "$BASEBRAINY"
 
-mkdir -p -v "$BASHSCRIPTS"
-
 mkdir -p -v "$LOGSEQ"
 
 rclone config create $REMOTE_NAME $STORAGE client_id=$CLIENT_ID client_secret=$CLIENT_SECRET
