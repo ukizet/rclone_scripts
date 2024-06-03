@@ -1,4 +1,4 @@
-#!/bin/bash
+# shellcheck shell=bash
 
 current_dir="$(dirname "$0")"
 
@@ -8,9 +8,18 @@ resync() {
   local_folder="$1"
   remote_folder="$2"
   exclude="--exclude-from $current_dir/.ignore"
-  rclone bisync "$local_folder" "$remote_folder" --create-empty-src-dirs --verbose --resync $exclude || exit 1
+  rclone bisync "$local_folder" "$remote_folder" --create-empty-src-dirs --verbose --resync "$exclude" || exit 1
 }
 
-# resync "$BASEBRAINY" "$BASEBRAINYREMOTE" 
+sync() {
+  local_folder="$1"
+  remote_folder="$2"
+  exclude="--exclude-from $current_dir/.ignore"
+  rclone sync "$local_folder" "$remote_folder" --create-empty-src-dirs --verbose --interactive "$exclude" || exit 1
+}
+
 # resync "$BASHSCRIPTS" "$BASHSCRIPTSREMOTE"
-resync "$LOGSEQ" "$LOGSEQREMOTE"
+# resync "$BASEBRAINY" "$BASEBRAINYREMOTE" 
+# resync "$VAULT" "$VAULTREMOTE"
+
+# sync "$VAULT" "$VAULTREMOTE"

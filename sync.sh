@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 current_dir="$(dirname "$0")"
 
 source "$current_dir/config.sh" || exit 1
@@ -9,6 +11,4 @@ bisync() {
   rclone bisync "$local_folder" "$remote_folder" --create-empty-src-dirs --verbose $exclude || exit 1
 }
 
-# bisync "$BASEBRAINY" "$BASEBRAINYREMOTE" 
-# bisync "$BASHSCRIPTS" "$BASHSCRIPTSREMOTE"
-bisync "$LOGSEQ" "$LOGSEQREMOTE"
+bisync "$VAULT" "$VAULTREMOTE"

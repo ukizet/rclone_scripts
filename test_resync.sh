@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 PATH1="$HOME/Documents/BaseBrainy/"
 PATH2="remote:BaseBrainy/"
 
