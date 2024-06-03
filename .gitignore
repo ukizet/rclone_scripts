@@ -1,2 +1,3 @@
 config.sh
 vaults.db
+.env

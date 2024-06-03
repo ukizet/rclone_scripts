@@ -1,0 +1,14 @@
+CLIENT_ID="your client id"
+CLIENT_SECRET="your client secret"
+
+REMOTE_NAME=remote
+STORAGE=drive
+
+BASEBRAINY="$HOME/Documents/vaults/BaseBrainy/"
+BASEBRAINYREMOTE="remote:Vaults/BaseBrainy/"
+
+BASHSCRIPTS="$HOME/Documents/repos/bash_scripts/"
+BASHSCRIPTSREMOTE="remote:bash_scripts/"
+
+VAULT="$HOME/Documents/Vaults/Vault/"
+VAULTREMOTE="remote:Vaults/Vault/"

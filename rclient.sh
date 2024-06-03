@@ -1,45 +1,28 @@
 # shellcheck shell=bash
 
+set -a
+source .env
+set +a
+
 current_dir="$(dirname "$0")"
 
-BASEBRAINY="$HOME/Documents/vaults/BaseBrainy/" # /home/sas/Documents/vaults/BaseBrainy
-BASEBRAINYREMOTE="remote:Vaults/BaseBrainy/"
-
-BASHSCRIPTS="$HOME/Documents/repos/bash_scripts/"
-BASHSCRIPTSREMOTE="remote:bash_scripts/"
-
-VAULT="$HOME/Documents/Vaults/Vault/"
-VAULTREMOTE="remote:Vaults/Vault/"
-
-CLIENT_ID="1063561364943-56g8n49kegfi0u4it96h7fpssbu2jlf8.apps.googleusercontent.com"
-CLIENT_SECRET="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"
-
 bisync() {
-  local_folder="$1"
-  remote_folder="$2"
+  local local_folder="$1"
+  local remote_folder="$2"
+  local args="${3:-}"
   exclude="--exclude-from $current_dir/.ignore"
-  rclone bisync "$local_folder" "$remote_folder" --create-empty-src-dirs --verbose "$exclude" || exit 1
+
+  if [[ -n $args ]]; then
+    echo -e "rclone bisync $local_folder $remote_folder --create-empty-src-dirs --verbose $args $exclude \n"
+    rclone bisync "$local_folder" "$remote_folder" --create-empty-src-dirs --verbose "$args" $exclude || exit 1
+  else
+    echo -e "rclone bisync $local_folder $remote_folder --create-empty-src-dirs --verbose $exclude \n"
+    rclone bisync "$local_folder" "$remote_folder" --create-empty-src-dirs --verbose $exclude || exit 1
+  fi
 }
 
-test_bisync() {
-  local_folder="$1"
-  remote_folder="$2"
-  exclude="--exclude-from $current_dir/.ignore"
-  rclone bisync "$local_folder" "$remote_folder" --create-empty-src-dirs --verbose --dry-run "$exclude" || exit 1
-}
-
-resync() {
-  local_folder="$1"
-  remote_folder="$2"
-  exclude="--exclude-from $current_dir/.ignore"
-  rclone bisync "$local_folder" "$remote_folder" --create-empty-src-dirs --verbose --resync "$exclude" || exit 1
-}
-
-test_resync() {
-  local_folder="$1"
-  remote_folder="$2"
-  exclude="--exclude-from $current_dir/.ignore"
-  rclone bisync "$local_folder" "$remote_folder" --create-empty-src-dirs --verbose --resync "$exclude" || exit 1
+create_config() {
+  rclone config create "$REMOTE_NAME" "$STORAGE" client_id="$CLIENT_ID" client_secret="$CLIENT_SECRET"
 }
 
 if [[ $# -eq 0 ]]; then
@@ -49,29 +32,29 @@ fi
 
 while [[ $# -gt 0 ]]; do
   case $1 in
-    bisync)
-      bisync "$VAULT" "$VAULTREMOTE"
-      shift
-      ;;
-    testbisync)
-      echo "not ready"
-      shift
-      ;;
-    resync)
-      echo "not ready"
-      shift
-      ;;
-    testresync)
-      echo "not ready"
-      shift
-      ;;
-    init)
-      echo "not ready"
-      shift
-      ;;
-    *)
-      echo "Unknown argument: $1"
-      exit 1
-      ;;
+  bisync)
+    bisync "$VAULT" "$VAULTREMOTE"
+    shift
+    ;;
+  testbisync)
+    bisync "$VAULT" "$VAULTREMOTE" "--dry-run"
+    shift
+    ;;
+  resync)
+    bisync "$VAULT" "$VAULTREMOTE" "--resync"
+    shift
+    ;;
+  testresync)
+    bisync "$VAULT" "$VAULTREMOTE" "--resync --dry-run"
+    shift
+    ;;
+  init)
+    create_config
+    shift
+    ;;
+  *)
+    echo "Unknown argument: $1"
+    exit 1
+    ;;
   esac
 done
