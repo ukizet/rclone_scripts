@@ -1,6 +1,6 @@
 # About
 
-You need to create config.sh so it could work correctly. Example:
+You need to create .env so it could work correctly. Example:
 ```sh
 BASEBRAINY="$HOME/Documents/BaseBrainy/"
 BASEBRAINYREMOTE="remote:BaseBrainy/"
@@ -15,4 +15,4 @@ CLIENT_ID=""
 CLIENT_SECRET=""
 ```
 
-Scripts dont have shebang cause I'm using NixOS and.. usual shebangs don't work here.
+P.S. Scripts dont have shebang cause I'm using NixOS and.. usual shebangs don't work here.
