@@ -1,10 +1,11 @@
 # shellcheck shell=bash
 
+current_dir="$(dirname "$0")"
+
 set -a
-source .env
+source $current_dir/.env
 set +a
 
-current_dir="$(dirname "$0")"
 
 bisync() {
   local local_folder="$1"
@@ -32,6 +33,17 @@ fi
 
 while [[ $# -gt 0 ]]; do
   case $1 in
+  --help)
+    echo "
+bisync     - bisync
+testbisync - testbisync
+resync     - first bisync
+testresync - testresync
+init       - initialize rclone
+--help     - this massage
+"
+    shift
+    ;;
   bisync)
     bisync "$VAULT" "$VAULTREMOTE"
     shift
