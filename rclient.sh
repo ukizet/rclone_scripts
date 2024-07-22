@@ -35,7 +35,7 @@ while [[ $# -gt 0 ]]; do
   case $1 in
   --help)
     echo "
-bisync     - bisync
+bisync     - bisync 'rclone bisync local_folder remote_folder --create-empty-src-dirs --verbose exclude || exit 1'
 testbisync - testbisync
 resync     - first bisync
 testresync - testresync

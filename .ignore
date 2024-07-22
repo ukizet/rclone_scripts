@@ -1,5 +1,6 @@
 logseq/
 .logseq/
-obsidian/
-.obsidian/
+.obsidian/appearance.json
+.obsidian/plugins/
+.obsidian/workspace.json
 .git/
